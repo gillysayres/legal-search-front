@@ -7,8 +7,6 @@ function SearchForm({ handleSearch }) {
   const {
     search,
     isCnjValid,
-    searchPerformed,
-    recordsFound,
     errorMessage,
     loading,
     handleInputChange,
@@ -28,7 +26,7 @@ function SearchForm({ handleSearch }) {
             type="text"
             value={search.cnjNumber}
             onChange={handleInputChange}
-            placeholder="Digite o número CNJ"
+            placeholder="Pesquisar no Jusbrasil"
             required
             maxLength="25"
             // Dynamically set the className based on CNJ validity
@@ -44,14 +42,8 @@ function SearchForm({ handleSearch }) {
           disabled={!isCnjValid || loading}
         >
           {/* Show loading message if loading, otherwise show search prompt */}
-          {loading ? 'Buscando...' : 'Buscar'}
+          {loading ? 'Consultando...' : 'Consultar'}
         </button>
-        {/* Show no records message if search was performed and no records were found */}
-        {searchPerformed && !recordsFound && (
-          <p className="no-records-message">
-            Nenhum processo com esse número CNJ foi encontrado.
-          </p>
-        )}
         {/* Display any error messages */}
         {errorMessage && <p className="error-message">{errorMessage}</p>}
       </form>
