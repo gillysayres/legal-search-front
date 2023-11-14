@@ -23,3 +23,15 @@
 .App-link {
   color: #61dafb;
 }
+
+.app-container img {
+  margin: 0 auto;
+  display: flex;
+  padding: 20px 0;
+
+}
+
+.app-header h1{
+  display: flex;
+  justify-content: center;
+}

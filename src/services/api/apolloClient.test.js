@@ -19,8 +19,10 @@ describe('Apollo Client Configuration', () => {
       </MockedProvider>
     );
 
-    // Wait for any GraphQL queries to resolve (optional)
-    await waitFor(() => {});
+    // Wait for any GraphQL queries to resolve and assert the result
+    await waitFor(() => {
+      expect(getByText('expected text')).toBeInTheDocument();
+    });
 
     // You can add more assertions here if needed
   });
