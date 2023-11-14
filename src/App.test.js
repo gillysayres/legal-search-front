@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, fireEvent, waitFor } from '@testing-library/react';
+import { render, fireEvent, waitFor, screen } from '@testing-library/react';
 import { useLazyQuery } from '@apollo/client';
 import App from './App';
 
@@ -34,9 +34,15 @@ describe('App Component', () => {
     ]);
     useLazyQuery.mockImplementation(() => mockExecuteSearch());
 
-    const { getByText } = render(<App />);
-    fireEvent.click(getByText('Consultar'));
+    render(<App />);
 
+    // Find the "Consultar" button using screen.getByText
+    const consultarButton = screen.getByText('Consultar');
+
+    // Simulate clicking the "Consultar" button
+    fireEvent.click(consultarButton);
+
+    // Wait for the query execution
     await waitFor(() => {
       expect(mockExecuteSearch).toHaveBeenCalled();
     });
@@ -65,7 +71,12 @@ describe('App Component', () => {
       { loading: true, error: null, data: null },
     ]);
 
-    const { getByText } = render(<App />);
-    expect(getByText('Carregando...')).toBeInTheDocument();
+    render(<App />);
+
+    // Find the loading text using screen.getByText
+    const loadingText = screen.getByText('Carregando...');
+
+    // Expect the loading text to be in the document
+    expect(loadingText).toBeInTheDocument();
   });
 });
